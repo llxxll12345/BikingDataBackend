@@ -10,6 +10,9 @@ public class User {
     private int gender;
     private Date dateJoined;
     private String serializedTags;
+    private int type;
+    private String city;
+    private String password;
 
     public void setName(String name) {
         this.name = name;
@@ -65,5 +68,21 @@ public class User {
 
     public void setSerializedTags(String serializedTags) {
         this.serializedTags = serializedTags;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

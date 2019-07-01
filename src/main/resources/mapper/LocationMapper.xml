@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bikingdata.backend.dao.LocationDao">
+
+    <resultMap id="BaseResultMap" type="com.bikingdata.backend.domain.Location">
+        <result column="loc_id" property="locationId" />
+        <result column="loc_name" property="name" />
+        <result column="user_id" property="userId" />
+        <result column="tag" property="tag" />
+        <result column="route_id" property="routeId"/>
+        <result column="urls" property="urls"/>
+        <result column="upvotes" property="upvotes"/>
+        <result column="is_private" property="isPrivate"/>
+        <result column="longitude" property="longitude"/>
+        <result column="latitude" property="latitude"/>
+        <result column="region" property="region"/>
+    </resultMap>
+
+    <sql id="BaseSelectList">
+		loc_id, loc_name, user_id, tag, route_id, urls, upvotes, is_private, longitude, latitude, region
+	</sql>
+
+    <sql id="BaseInsertList">
+        loc_name, user_id, tag, route_id, urls, upvotes, is_private, longitude, latitude, region
+    </sql>
+
+    <sql id="BaseInsertValues">
+        <if test="locName != null and LocName != ''">
+            #{locName},
+        </if>
+        <if test="userId != null and userId != ''">
+            #{userId},
+        </if>
+        <if test="tag != null and tag != ''">
+            #{tag}
+        </if>
+        <if test="route_id != null and route_id > 0">
+            #{routeId}
+        </if>
+        <if test="urls != null and urls != ''">
+            #{urls}
+        </if>
+        <if test="upvotes != null and upvotes >= 0">
+            #{upvotes}
+        </if>
+        <if test="is_private != null and (is_private == 1 or is_private == 0)">
+            #{isPrivate}
+        </if>
+        <if test="region != null and region != ''">
+            #{region}
+        </if>
+    </sql>
+
+    <sql id="BaseUpdate">
+        <set>
+            loc_id = #{locId},
+            loc_name = #{locName},
+            user_id = #{userId},
+            tag = #{tag},
+            route_id = #{routeId},
+            urls = #{urls},
+            upvotes = #{upvotes},
+            is_private = #{isPrivate},
+            longitude = #{longitude},
+            latitude = #{latitude},
+            region = #{region}
+        </set>
+    </sql>
+
+    <select id="findLocName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="BaseSelectList" />
+        from location
+        where loc_name like #{locName}
+    </select>
+
+    <insert id="insertLocation">
+        insert into city (
+            <include refid="BaseInsertList"/>
+        )
+        values(
+            <include refid="BaseInsertValues"/>
+        )
+    </insert>
+
+    <update id="updateLocation">
+        update location
+        <include refid="BaseUpdate" />
+        where loc_id=#{locId}
+    </update>
+
+    <delete id="deleteLocation">
+        delete from location
+        where loc_id=#{locId}
+    </delete>
+
+    <select id="findLocation" resultMap="BaseResultMap">
+        select
+        <include refid="BaseSelectList" />
+        from location
+        where loc_id=#{locId}
+    </select>
+
+    <select id="findTag" resultMap="BaseResultMap">
+        select
+        <include refid="BaseSelectList" />
+        from location
+        where tag regexp #{tagName}
+    </select>
+
+    <select id="getLocationByRoute" resultMap="BaseResultMap">
+        select
+        <include refid="BaseSelectList" />
+        from location
+        where route_id=#{routeId}
+    </select>
+
+</mapper>

@@ -7,6 +7,15 @@ public class Route {
     private Long StartId;
     private Long EndId;
     private String serializedRoute;
+    private Long length;
+
+    public Long getLength() {
+        return length;
+    }
+
+    public void setLength(Long length) {
+        this.length = length;
+    }
 
     public void setUserId(Long userId) {
         this.userId = userId;

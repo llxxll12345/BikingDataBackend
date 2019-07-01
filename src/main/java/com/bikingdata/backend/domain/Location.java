@@ -6,9 +6,12 @@ public class Location {
     private Long userId;    // creator
     private String tag;
     private Long routeId;
-    private String serializedUrls;
+    private String urls;
     private Long upVotes;
     private Boolean isPrivate;
+    private Double longitude;
+    private Double latitude;
+    private String region;
 
     public void setLocationId(Long locationId) {
         this.locationId = locationId;
@@ -38,8 +41,8 @@ public class Location {
         return name;
     }
 
-    public String getSerializedUrls() {
-        return serializedUrls;
+    public String getUrls() {
+        return urls;
     }
 
     public String getTag() {
@@ -50,8 +53,8 @@ public class Location {
         this.routeId = routeId;
     }
 
-    public void setSerializedUrls(String serializedUrls) {
-        this.serializedUrls = serializedUrls;
+    public void setUrls(String urls) {
+        this.urls = urls;
     }
 
     public void setTag(String tag) {
@@ -72,5 +75,29 @@ public class Location {
 
     public void setPrivate(Boolean aPrivate) {
         isPrivate = aPrivate;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }
